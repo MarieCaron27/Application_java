@@ -1,27 +1,27 @@
 public class Pilote
 {
-    private String nom;
+    private String name;
 
     public Pilote()
     {
-        setNom("Mario");
+        setName("Mario");
     }
 
     public Pilote(String n)
     {
-        setNom(n);
+        setName(n);
     }
 
-    public String getNom()
+    public String getName()
     {
-        return nom;
+        return name;
     }
 
-    public void setNom(String n)
+    public void setName(String n)
     {
         if(!n.isEmpty())
         {
-            nom = n;
+            name = n;
         }
     }
 }
