@@ -1,7 +1,8 @@
 public class Pilote
 {
-    //Variable :
+    //Fields :
     private String name;
+    private float weight;
 
     //Constructors :
     public Pilote()
