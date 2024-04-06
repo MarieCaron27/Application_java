@@ -5,25 +5,26 @@ import java.awt.*;
 import java.util.Vector;
 
 public class ICreateCar extends JFrame {
-    private JPanel mainPanel;
-    private JTextArea textArea;
     private JList<String> listCars;
     private JList<String> listPilotes;
     private JList<String> listTires;
-    private JButton buttonGo;
+    private JButton scrollLeftButton;
+    private JButton scrollRightButton;
 
     public ICreateCar() {
         super("Conception de ma voiture");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(750, 750);
 
+        // Création des panneaux pour chaque ligne
+        JPanel panel1 = new JPanel(new FlowLayout());
+        JPanel panel2 = new JPanel(new GridLayout(1, 2));
+        JPanel panel3 = new JPanel(new FlowLayout());
+
         // Initialisation des JList
         listCars = new JList<>();
         listPilotes = new JList<>();
         listTires = new JList<>();
-
-        // Création d'un JPanel avec un GridLayout pour organiser les JList
-        JPanel panel = new JPanel(new GridLayout(3, 1));
 
         // Liste des voitures
         Vector<String> vCars = new Vector<>();
@@ -55,13 +56,27 @@ public class ICreateCar extends JFrame {
         vTires.add("Tire6");
         listTires.setListData(vTires);
 
-        // Ajout des JList au JPanel
-        panel.add(new JScrollPane(listCars));
-        panel.add(new JScrollPane(listPilotes));
-        panel.add(new JScrollPane(listTires));
+        // Création des JScrollPane horizontaux pour les JList
+        JScrollPane scrollPaneCars = new JScrollPane(listPilotes);
+        scrollPaneCars.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
-        // Ajout du JPanel à la fenêtre
-        add(panel);
+        JScrollPane scrollPanePilotes = new JScrollPane(listCars);
+        scrollPanePilotes.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+        JScrollPane scrollPaneTires = new JScrollPane(listTires);
+        scrollPaneTires.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+
+        // Ajout des composants aux panneaux respectifs
+        panel1.add(scrollPaneCars);
+        panel2.add(scrollPanePilotes);
+        panel2.add(scrollPaneTires);
+
+
+        // Ajout des panneaux à la JFrame
+        add(panel1, BorderLayout.NORTH);
+        add(panel2, BorderLayout.CENTER);
+        add(panel3, BorderLayout.SOUTH);
 
         pack();
     }
