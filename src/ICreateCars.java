@@ -2,39 +2,76 @@ package src;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ICreateCars extends JFrame {
+
+    private JPanel mainPanel1;
+    private JPanel mainPanel2;
+    private JPanel mainPanel3;
+    private JPanel mainPanel4;
+    private JTable tablePilotes;
+    private JTable tableKarts;
+    private JTable tableTires;
+    private JButton quitButton;
+    private JButton saveButton;
+
     public ICreateCars() {
         super("Conception de ma voiture");
+        JPanel mainPanel = new JPanel(new BorderLayout(3,3));
+
+        setContentPane(mainPanel);
+        setSize(500, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Obtenir la taille de l'écran
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int screenWidth = (int) screenSize.getWidth();
-        int screenHeight = (int) screenSize.getHeight();
-        setSize(screenWidth, screenHeight); // Ajuster la taille de la fenêtre principale à la taille de l'écran
+        saveButton = new JButton("Enregistrer");
+        quitButton = new JButton("Quitter");
 
-        // Création des panneaux pour chaque ligne
-        JPanel panel1 = new JPanel(new FlowLayout());
-        JPanel panel2 = new JPanel(new GridLayout(1, 3)); // Utilisation d'un GridLayout pour 3 colonnes
-        JPanel panel3 = new JPanel(new FlowLayout());
-
-        // Ajout des panneaux à la fenêtre principale
-        add(panel1, BorderLayout.NORTH);
-        add(panel2, BorderLayout.CENTER);
-        add(panel3, BorderLayout.SOUTH);
+        quitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
 
         // Création des conteneurs
-        createPilotesContainer(panel1);
-        createTiresContainer(panel2);
-        createKartsContainer(panel2);
-        createCarInfoContainer(panel3);
+        /*createPilotesContainer(mainPanel);
+        createTiresContainer(mainPanel);
+        createKartsContainer(mainPanel);
+        createCarInfoContainer(mainPanel);*/
+
+        mainPanel1.setLayout(new FlowLayout());
+        mainPanel2.setLayout(new GridLayout(1,3));
+        mainPanel3.setLayout(new FlowLayout());
+        mainPanel4.setLayout(new FlowLayout());
+
+        /*mainPanel1.setPilote(new PiloteTableModel(new ArrayList<>()));
+
+        mainPanel2.setKart(new KartTableModel(new ArrayList<>()));
+        mainPanel2.setTire(new TireTableModel(new ArrayList<>()));*/
+        mainPanel2.add(saveButton);
+
+
+
+        mainPanel4.add(saveButton);
+        mainPanel4.add(quitButton);
+
     }
 
-    void createPilotesContainer(JPanel containerPanel) {
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            ICreateCars fenetre = new ICreateCars();
+            fenetre.setVisible(true);
+        });
+    }
+}
+
+    /*void createPilotesContainer(JPanel containerPanel) {
         JPanel panel = new JPanel(new GridLayout(0, 3, 1, 1)); // 3 colonnes, lignes ajustées automatiquement, avec un espace de 10 pixels entre chaque composant
 
         String[] myImages = {
@@ -135,11 +172,5 @@ public class ICreateCars extends JFrame {
         JLabel carInfoLabel = new JLabel("Propriétés de la voiture");
         containerPanel.add(carInfoLabel);
     }
+*/
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            ICreateCars marioKartGUI = new ICreateCars();
-            marioKartGUI.setVisible(true);
-        });
-    }
-}
